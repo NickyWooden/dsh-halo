@@ -1,0 +1,11 @@
+# dsh-halo bundle layer: applied automatically when the package is installed
+# as a profile bundle (package.json declares dsh.bundle.patch).
+#
+# The row is a bare plugin by package name: the node half (exports ".") runs
+# in the host process and owns the /dsh-halo/publish route plus the settings
+# namespace; the `dsh.client` declaration in package.json makes the browser
+# half (exports "./client", served at /plugins/dsh-halo/client.js) load in
+# the web GUI.
+- insert:
+    - id: dsh-halo
+      name: 'dsh-halo'

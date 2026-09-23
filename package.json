@@ -1,0 +1,26 @@
+{
+  "name": "dsh-halo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "One-click publish of DSH conversations as articles on a Halo blog (halo.run). Adds a composer-dock button and a Halo Blog settings tab.",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "slots",
+        "settingsScope",
+        "locale"
+      ]
+    }
+  }
+}
