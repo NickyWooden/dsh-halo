@@ -28,7 +28,8 @@ DSH（DeepSeek Harness）Web GUI 插件：在输入栏模型选择下拉框左�
 ## 安装
 
 ```sh
-dsh plugin --profile web add link:/home/ai/Documents/vs-code/default/dsh-halo
+git clone git@github.com:NickyWooden/dsh-halo.git
+dsh plugin --profile web add link:$(pwd)/dsh-halo
 # 然后重启 dsh web
 ```
 
