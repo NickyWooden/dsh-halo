@@ -27,13 +27,39 @@ DSH（DeepSeek Harness）Web GUI 插件：在输入栏模型选择下拉框左�
 
 ## 安装
 
+从插件市场 / npm（推荐）：
+
 ```sh
-git clone git@github.com:NickyWooden/dsh-halo.git
-dsh plugin --profile web add link:$(pwd)/dsh-halo
+dsh plugin --profile web add dsh-halo
 # 然后重启 dsh web
 ```
 
-> 注意：`node_modules/schemastery` 是指向 profile node_modules 的符号链接，用于让 `link:` 方式安装时宿主端能解析依赖；若更换部署环境请保持该链接有效。
+本地开发（link: 方式）：
+
+```sh
+dsh plugin --profile web add link:/path/to/dsh-halo
+```
+
+> 注意：仓库内的 `node_modules/@deepseek-ai/schemastery` 是指向 profile node_modules 的符号链接（已 gitignore），仅用于让 `link:` 方式安装时宿主端能解析 peer 依赖；npm 安装时由 pnpm 自动处理。
+
+## 发布到插件市场
+
+DSH 的「插件市场」（`dshmarket`，设置 → Plugin Market）以 **npm registry** 为分发源、以 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) 目录为浏览数据。上架步骤：
+
+1. **GitHub 仓库**：把本包推到 `github.com/<you>/dsh-halo`，添加 [`dsh-plugin`](https://github.com/topics/dsh-plugin) topic；仓库需创建满 1 天才能投稿。
+2. **npm 发布**：改好 package.json 的 `repository.url`（当前为 CHANGE-ME），然后 `npm publish`（建议用 scope 名如 `@<you>/dsh-halo` 避免抢注）。市场安装优先走「仓库可验证的 npm 包」，秒装。
+3. **目录投稿**：向 awesome-dsh-plugin 提 PR，新增一个文件 `data/plugins/<owner>__dsh-halo.yml`：
+
+   ```yaml
+   url: https://github.com/<you>/dsh-halo
+   name: <you>/dsh-halo
+   category: tools
+   description:
+     en: One-click publish of DSH conversations as Markdown articles on a Halo CMS blog.
+     zh: 一键把 DSH 问答对话发布为 Halo 博客文章。
+   ```
+
+4. **可选加分项**：仓库内放截图（市场卡片展示，图片走 GitHub 托管）、开启 GitHub Discussions（评论区由 giscus 驱动）。
 
 ## 已知限制
 

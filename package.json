@@ -1,14 +1,34 @@
 {
   "name": "dsh-halo",
   "version": "0.1.0",
-  "private": true,
-  "description": "One-click publish of DSH conversations as articles on a Halo blog (halo.run). Adds a composer-dock button and a Halo Blog settings tab.",
+  "description": "One-click publish of DSH conversations as Markdown articles on a Halo CMS blog: confirm, type the console password (never stored), and the Q&A record is created through the Halo REST API.",
   "type": "module",
   "main": "./lib/index.js",
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
     "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek",
+    "deepseek-harness",
+    "halo",
+    "blog",
+    "publish",
+    "markdown"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHANGE-ME/dsh-halo.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": "^3.18.1"
   },
   "dsh": {
     "bundle": {
