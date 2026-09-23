@@ -49,7 +49,8 @@ dsh plugin --profile web add dsh-halo
 本地开发（link: 方式）：
 
 ```sh
-dsh plugin --profile web add link:/path/to/dsh-halo
+git clone git@github.com:NickyWooden/dsh-halo.git
+dsh plugin --profile web add link:${pwd}/dsh-halo
 ```
 
 > 注意：仓库内的 `node_modules/@deepseek-ai/schemastery` 是指向 profile node_modules 的符号链接（已 gitignore），仅用于让 `link:` 方式安装时宿主端能解析 peer 依赖；npm 安装时由 pnpm 自动处理。
