@@ -25,6 +25,18 @@ DSH（DeepSeek Harness）Web GUI 插件：在输入栏模型选择下拉框左�
 
 安全：发布路由仅接受 loopback / same-origin 调用（fail-closed）；本机 DSH 设置文档中只持久化用户名与博客地址。
 
+## 使用说明
+
+1. **配置**：打开 **设置 → Plugins → Halo Blog**，填写博客地址与控制台用户名后保存。密码不会被保存——每次发布时都会要求手动输入（掩码显示，防窥视）。
+
+   ![Halo Blog 设置页](pics/settings-panel.png)
+
+2. **发布**：在输入栏中点击模型选择下拉框左侧的「**发布对话**」按钮。
+
+   ![输入栏中的「发布对话」按钮](pics/publish-button.png)
+
+3. **确认并输入密码**：先弹出确认框「是否发布到halo?」，再弹出密码输入框；两步都通过后，当前会话的问答实录即通过 Halo REST API 创建为博客文章。成功后按钮显示「已发布 ✓」并附「打开文章」链接；失败时显示错误原因。
+
 ## 安装
 
 从插件市场 / npm（推荐）：
@@ -47,7 +59,7 @@ dsh plugin --profile web add link:/path/to/dsh-halo
 DSH 的「插件市场」（`dshmarket`，设置 → Plugin Market）以 **npm registry** 为分发源、以 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) 目录为浏览数据。上架步骤：
 
 1. **GitHub 仓库**：把本包推到 `github.com/<you>/dsh-halo`，添加 [`dsh-plugin`](https://github.com/topics/dsh-plugin) topic；仓库需创建满 1 天才能投稿。
-2. **npm 发布**：改好 package.json 的 `repository.url`（当前为 CHANGE-ME），然后 `npm publish`（建议用 scope 名如 `@<you>/dsh-halo` 避免抢注）。市场安装优先走「仓库可验证的 npm 包」，秒装。
+2. **npm 发布**：`repository.url` 已指向本仓库，直接 `npm publish`（若担心无 scope 名被抢注，可改用 `@<you>/dsh-halo`）。市场安装优先走「仓库可验证的 npm 包」，秒装。
 3. **目录投稿**：向 awesome-dsh-plugin 提 PR，新增一个文件 `data/plugins/<owner>__dsh-halo.yml`：
 
    ```yaml
