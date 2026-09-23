@@ -4,6 +4,13 @@
   "description": "One-click publish of DSH conversations as Markdown articles on a Halo CMS blog: confirm, type the console password (never stored), and the Q&A record is created through the Halo REST API.",
   "type": "module",
   "main": "./lib/index.js",
+  "files": [
+    "lib/",
+    "cordis.patch.yml"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
@@ -20,9 +27,10 @@
     "publish",
     "markdown"
   ],
+  "homepage": "https://github.com/NickyWooden/dsh-halo#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CHANGE-ME/dsh-halo.git"
+    "url": "git+https://github.com/NickyWooden/dsh-halo.git"
   },
   "engines": {
     "node": ">=22"
