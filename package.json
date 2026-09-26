@@ -45,9 +45,8 @@
     "client": {
       "platform": "web",
       "inject": [
-        "slots",
-        "settingsScope",
-        "locale"
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale"
       ]
     }
   }
