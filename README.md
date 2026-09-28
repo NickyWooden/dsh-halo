@@ -18,7 +18,7 @@ DSH（DeepSeek Harness）Web GUI 插件：在输入栏模型选择下拉框左�
 
 | 层 | 说明 |
 | --- | --- |
-| 宿主端 `lib/index.js` | 注册 `dsh-halo` 设置命名空间（blogUrl / username / publishImmediately）与 `POST /dsh-halo/publish` 路由；登录流程为 `GET /login`（取 `_csrf` + XSRF-TOKEN cookie + RSA 公钥）→ Node crypto 以 PKCS#1 v1.5 加密密码 → `POST /login`（urlencoded 表单，`redirect: manual` 检查 302 Location 判断成败）；zstd 解压优先用 Node 内置 `zlib.zstdDecompressSync`，回退到系统 `zstd` 命令；Markdown→HTML 优先 pandoc，回退到内置转换器 |
+| 宿主端 `lib/index.js` | 注册/派生 `dsh-halo` 设置命名空间（blogUrl / username / publishImmediately，三个字段均标记 `.volatile()`）与 `POST /dsh-halo/publish` 路由。设置写入按宿主能力自适应：0.1.7+ 宿主（`SettingsForms` 只有 `describe`/`update`/`replace`/`mutate`、无 `register`，命名空间改由插件 Config schema 派生，见 #677）经 `canRegister()` 守卫跳过后回退到 `settings.update(NS, …)`；更早的宿主走 `register` + scope。登录流程为 `GET /login`（取 `_csrf` + XSRF-TOKEN cookie + RSA 公钥）→ Node crypto 以 PKCS#1 v1.5 加密密码 → `POST /login`（urlencoded 表单，`redirect: manual` 检查 302 Location 判断成败）；zstd 解压优先用 Node 内置 `zlib.zstdDecompressSync`，回退到系统 `zstd` 命令；Markdown→HTML 优先 pandoc，回退到内置转换器 |
 | 浏览器端 `lib/client.js` | 注入输入栏按钮与 Plugins 设置页；发布时依次弹出确认框与密码输入框，把用户输入的密码随请求发给宿主路由；所有网络请求走同源宿主路由，避免跨域问题 |
 
 **密码不落盘**：控制台密码不写入 `~/.dsh/settings.yaml`、不出现在任何配置中——每次点「发布对话」都会弹框要求手动输入，密码只存在于该次 HTTP 请求与登录过程中。即使插件源码外泄，攻击者也无法找回密码，因为磁盘上既没有密钥材料也没有密文。
